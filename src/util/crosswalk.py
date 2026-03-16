@@ -1,8 +1,9 @@
 
+
 from sportsdataverse.mbb import espn_mbb_teams
 from rapidfuzz import process
 import polars as pl
-from bart_torvik import import_bart
+from src.util.bart_torvik import import_bart
 
 
 def get_bart_espn_crosswalk() -> pl.DataFrame:

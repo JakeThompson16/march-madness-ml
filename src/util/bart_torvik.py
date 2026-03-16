@@ -1,7 +1,10 @@
+
+
 import time
 import requests
 import polars as pl
 from functools import lru_cache
+
 
 TRANK_COLUMNS = [
     "team", "conf", "barthag", "barthag_rk",
