@@ -21,8 +21,7 @@ build/
 .idea/
 
 # Data files (optional, remove if you want to commit data)
-data/
-*.csv
+hidden/
 *.parquet
 
 # OS
