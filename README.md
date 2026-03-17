@@ -5,15 +5,10 @@ Machine Learning tool to assign win probabilities to march madness games and con
 
 *The following evaluations are based on training from 2019,2021,2022,2023 and testing on 2024 season*
 
-Log Loss:  0.5832
-
-Brier:     0.2063
-
-AUC-ROC:   0.7226
-
-Accuracy:  0.6716
-
-
+- Log Loss:  0.5607
+- Brier:     0.1916
+- AUC-ROC:   0.7127
+- Accuracy:  0.7015
 
 ## Data Sources
  - College Basketball Data (CBBD)
