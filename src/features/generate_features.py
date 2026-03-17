@@ -17,14 +17,26 @@ def map_kaggle_name(name: str) -> str | None:
 
 
 def generate_team_features(seasons: int | list[int]) -> pl.DataFrame:
+    if isinstance(seasons, int):
+        seasons = [seasons]
+
     cbbd = extract_cbbd_data(seasons)
     sdv = get_sdv_features(seasons)
-    return cbbd.join(
-        sdv,
-        left_on=["team", "season"],
-        right_on=["team_location", "season"],
-        how="inner"
+    seeds = (
+        pl.read_csv("data/MNCAATourneySeeds.csv")
+        .filter(pl.col("Season").is_in(seasons))
+        .with_columns(
+            pl.col("Seed").map_elements(parse_seed, return_dtype=pl.Int32).alias("seed")
+        )
+        .join(pl.read_csv("data/MTeams.csv").with_columns(
+            pl.col("TeamName").map_elements(map_kaggle_name, return_dtype=pl.String).alias("TeamName")
+        ).filter(pl.col("TeamName").is_not_null()), on="TeamID", how="left")
+        .select(["TeamName", "Season", "seed"])
+        .rename({"TeamName": "team", "Season": "season"})
     )
+
+    df = cbbd.join(sdv, left_on=["team", "season"], right_on=["team_location", "season"], how="inner")
+    return df.join(seeds, on=["team", "season"], how="left")
 
 
 def build_matchup_df(seasons: int | list[int]) -> pl.DataFrame:
