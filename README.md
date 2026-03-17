@@ -3,19 +3,19 @@ Machine Learning tool to assign win probabilities to march madness games and con
 
 
 ## Data Sources
- - BartTorvig (BT)
+ - College Basketball Data (CBBD)
  - sportsdataverse (sdv)
 
 ## Features
- - Seed (BT)
- - Strength of schedule (BT)
- - AdjEM (BT)
- - AdjO (BT)
- - AdjD (BT)
- - eFG% (BT)
- - Turnover rate (BT)
- - oRB% (BT)
- - Free throw rate (BT)
+ - Seed (Kaggle)
+ - Strength of schedule ()
+ - AdjEM (CBBD)
+ - AdjO (CBBD)
+ - AdjD (CBBD)
+ - eFG% (CBBD)
+ - Turnover rate (CBBD)
+ - oRB% (CBBD)
+ - Free throw rate (CBBD)
  - 3 pt rate (sdv)
- - Tempo (BT)
+ - Tempo (CBBD)
  - Road win percentage (sdv)
