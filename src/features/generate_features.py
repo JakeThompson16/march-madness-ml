@@ -1,6 +1,7 @@
 import polars as pl
 from src.features.cbbd_features import extract_cbbd_data
 from src.features.sportsdataverse_features import get_sdv_features
+from data.team_name_map import KAGGLE_TO_CBBD
 
 TOURNEY_RESULTS_PATH = "data/MNCAATourneyDetailedResults.csv"
 TOURNEY_SEEDS_PATH = "data/MNCAATourneySeeds.csv"
@@ -11,10 +12,19 @@ def parse_seed(seed_str: str) -> int:
     return int("".join(filter(str.isdigit, seed_str)))
 
 
+def map_kaggle_name(name: str) -> str | None:
+    return KAGGLE_TO_CBBD.get(name, name)
+
+
 def generate_team_features(seasons: int | list[int]) -> pl.DataFrame:
     cbbd = extract_cbbd_data(seasons)
     sdv = get_sdv_features(seasons)
-    return cbbd.join(sdv, on=["team", "season"], how="inner")
+    return cbbd.join(
+        sdv,
+        left_on=["team", "season"],
+        right_on=["team_location", "season"],
+        how="inner"
+    )
 
 
 def build_matchup_df(seasons: int | list[int]) -> pl.DataFrame:
@@ -27,7 +37,17 @@ def build_matchup_df(seasons: int | list[int]) -> pl.DataFrame:
         .filter(pl.col("Season").is_in(seasons))
         .with_columns(pl.col("Seed").map_elements(parse_seed, return_dtype=pl.Int32).alias("seed_num"))
     )
-    teams = pl.read_csv(TEAMS_PATH)
+
+    # Load teams and apply kaggle -> cbbd name mapping, drop defunct teams
+    teams = (
+        pl.read_csv(TEAMS_PATH)
+        .with_columns(
+            pl.col("TeamName")
+            .map_elements(map_kaggle_name, return_dtype=pl.String)
+            .alias("TeamName")
+        )
+        .filter(pl.col("TeamName").is_not_null())
+    )
 
     # Add seeds for winner and loser
     results = (
@@ -50,7 +70,7 @@ def build_matchup_df(seasons: int | list[int]) -> pl.DataFrame:
         .then(1).otherwise(0).alias("team_a_won")
     )
 
-    # Map kaggle team IDs to team names via MTeams.csv
+    # Map kaggle team IDs to cbbd team names via MTeams.csv
     results = (
         results
         .join(teams.select(["TeamID", "TeamName"]),

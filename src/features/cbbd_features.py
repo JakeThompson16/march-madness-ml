@@ -1,7 +1,7 @@
 
 import cbbd
 import polars as pl
-from data.config import CBBD_API_KEY
+from data.secrets import CBBD_API_KEY
 
 config = cbbd.Configuration(access_token=CBBD_API_KEY)
 
