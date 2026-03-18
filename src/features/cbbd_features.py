@@ -42,7 +42,11 @@ def extract_cbbd_data(seasons: int | list[int]) -> pl.DataFrame:
                     "to_rate": s.team_stats.four_factors.turnover_ratio,
                     "orb_pct": s.team_stats.four_factors.offensive_rebound_pct,
                     "ft_rate": s.team_stats.four_factors.free_throw_rate,
-                    "three_pt_rate": s.team_stats.three_point_field_goals.attempted / s.team_stats.field_goals.attempted if s.team_stats.field_goals.attempted > 0 else 0,
+                    "three_pt_rate": (
+                        s.team_stats.three_point_field_goals.attempted / s.team_stats.field_goals.attempted
+                        if s.team_stats.field_goals.attempted > 0
+                        else 0
+                    ),
                 }
                 for s in stats
             ])
