@@ -11,15 +11,15 @@ flattening.
 ## Simulations
 *the following are win probabilities generated from 10,000 monte carlo simulations*
 1. Duke (1): 23.7%
-2. Michigan (2): 10.9%
-3. Arizona (3): 6.5%
-4. Florida (4): 4.5%
-5. Louisville (5): 4.3%
-6. Wisconsin (6): 3.3%
-7. Texas Tech (7): 2.7%
-8. Gonzaga (8): 2.7%
-9. Michigan State (9): 2.6%
-10. St. John's (10): 2.5%
+2. Michigan (1): 10.9%
+3. Arizona (1): 6.5%
+4. Florida (1): 4.5%
+5. Louisville (6): 4.3%
+6. Wisconsin (5): 3.3%
+7. Texas Tech (5): 2.7%
+8. Gonzaga (3): 2.7%
+9. Michigan State (3): 2.6%
+10. St. John's (5): 2.5%
 
 ## Metrics
 *targets indicate a strong model*
