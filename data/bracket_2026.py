@@ -31,7 +31,7 @@ REGIONS_2026: dict[str, dict[int, str]] = {
         8: "Villanova",
         9: "Utah State",
         10: "Santa Clara",
-        11: "Texas",  # First Four winner vs NC State
+        11: "Texas",
         12: "High Point",
         13: "Hawai'i",
         14: "Wright State",
@@ -54,7 +54,7 @@ REGIONS_2026: dict[str, dict[int, str]] = {
         13: "Hofstra",
         14: "Pennsylvania",
         15: "Queens University",
-        16: "UMBC",  # First Four winner vs Howard
+        16: "Howard",
     },
     "South": {
         1: "Florida",

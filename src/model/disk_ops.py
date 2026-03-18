@@ -1,17 +1,38 @@
-
-from sklearn.linear_model import LogisticRegression
+from sklearn.ensemble import RandomForestClassifier
 from sklearn.preprocessing import StandardScaler
 import joblib
 import torch
 
-LR_MODEL_PATH = "data/lr_model.joblib"
+RF_MODEL_PATH = "data/rf_model.joblib"
 NN_MODEL_PATH = "data/nn_model.joblib"
+SCALER_PATH = "data/scaler.joblib"
+TEMPERATURES_PATH = "data/temperatures.joblib"
 
-def save_lr_model(model: LogisticRegression, scaler: StandardScaler):
-    joblib.dump({"model": model, "scaler": scaler}, LR_MODEL_PATH)
+def save_temperatures(T_rf: float, T_nn: float):
+    joblib.dump({"T_rf": T_rf, "T_nn": T_nn}, TEMPERATURES_PATH)
 
-def load_recent_lr_model()->tuple[LogisticRegression, StandardScaler]:
-    bundle = joblib.load(LR_MODEL_PATH)
-    model = bundle["model"]
-    scaler = bundle["scaler"]
-    return model, scaler
+def load_temperatures() -> tuple[float, float]:
+    bundle = joblib.load(TEMPERATURES_PATH)
+    return bundle["T_rf"], bundle["T_nn"]
+
+def save_scaler(scaler: StandardScaler):
+    joblib.dump(scaler, SCALER_PATH)
+
+def load_scaler() -> StandardScaler:
+    return joblib.load(SCALER_PATH)
+
+
+def save_rf_model(model: RandomForestClassifier):
+    joblib.dump({"model": model}, RF_MODEL_PATH)
+
+def load_rf_model() -> RandomForestClassifier:
+    bundle = joblib.load(RF_MODEL_PATH)
+    return bundle["model"]
+
+
+def save_nn_model(model: torch.nn.Module):
+    joblib.dump({"model": model}, NN_MODEL_PATH)
+
+def load_nn_model() -> torch.nn.Module:
+    bundle = joblib.load(NN_MODEL_PATH)
+    return bundle["model"]
