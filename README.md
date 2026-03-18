@@ -51,10 +51,6 @@ flattening.
 - auc_roc: 0.6464
 - accuracy: 0.7041
 
-*Overall, model performance is strong, especially considering all data sources are free. By using paid KenPom subscription for additional/enhanced features I could likely improve all metrics.*
-
-
-
 ## Data Sources
  - College Basketball Data (CBBD)
  - sportsdataverse (sdv)
