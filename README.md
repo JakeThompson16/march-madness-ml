@@ -1,6 +1,8 @@
 # march-madness-ml
 Machine Learning tool to assign win probabilities to march madness games and construct brackets with differing levels of variance.
 
+*Disclaimer - GUI is built by AI*
+
 ## The Model
 Using an ensemble of Neural Network and Random Forest models (using the same features).
 Initially tested using Logistic Regression and XGBoost models which struggled in cross validation
