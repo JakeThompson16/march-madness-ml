@@ -1,12 +1,11 @@
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.preprocessing import StandardScaler
+from sklearn.calibration import CalibratedClassifierCV
+from xgboost import XGBClassifier
 import polars as pl
-import torch
-import torch.nn as nn
-from torch.utils.data import DataLoader, TensorDataset
 from src.features.generate_features import build_matchup_df
 from src.model.evaluate import metrics, visualize
-from src.model.disk_ops import save_rf_model, save_nn_model, save_scaler, load_scaler
+from src.model.disk_ops import save_rf_model, save_scaler, save_xgb_model, save_xgb_scaler
 
 
 def _prepare_data(seasons: list[int]):
@@ -22,7 +21,7 @@ def _prepare_data(seasons: list[int]):
     return X_train, y_train, X_test, y_test
 
 
-def train_rf_model(seasons: int | list[int], show_metrics=True) -> RandomForestClassifier:
+def train_rf_model(seasons: int | list[int], show_metrics=True) -> tuple[RandomForestClassifier, StandardScaler]:
     """
     Train a Random Forest model based on march madness games from seasons.
     Also fits and saves the shared scaler.
@@ -36,7 +35,12 @@ def train_rf_model(seasons: int | list[int], show_metrics=True) -> RandomForestC
     X_train = scaler.fit_transform(X_train)
     X_test = scaler.transform(X_test)
 
-    model = RandomForestClassifier(n_estimators=100, max_depth=4, random_state=42)
+    model = RandomForestClassifier(
+        n_estimators=200,
+        max_depth=4,
+        random_state=42,
+        min_samples_leaf=3
+    )
     model.fit(X_train, y_train)
 
     y_prob = model.predict_proba(X_test)[:, 1]
@@ -49,76 +53,51 @@ def train_rf_model(seasons: int | list[int], show_metrics=True) -> RandomForestC
     return model, scaler
 
 
-def train_and_save_rf_model(seasons: int | list[int], show_metrics=True) -> RandomForestClassifier:
+def train_and_save_rf_model(seasons: int | list[int], show_metrics=True) -> tuple[RandomForestClassifier, StandardScaler]:
     model, scaler = train_rf_model(seasons, show_metrics)
     save_rf_model(model)
     save_scaler(scaler)
     return model, scaler
 
 
-class MarchMadnessNN(nn.Module):
-    def __init__(self, input_dim: int):
-        super().__init__()
-        self.net = nn.Sequential(
-            nn.Linear(input_dim, 32),
-            nn.ReLU(),
-            nn.Dropout(0.5),
-            nn.Linear(32, 16),
-            nn.ReLU(),
-            nn.Dropout(0.5),
-            nn.Linear(16, 1),
-            nn.Sigmoid()
-        )
-
-    def forward(self, x):
-        return self.net(x)
-
-
-def train_nn_model(seasons: int | list[int], show_metrics=True) -> MarchMadnessNN:
+def train_xgb_model(seasons: int | list[int], show_metrics=True) -> tuple[CalibratedClassifierCV, StandardScaler]:
     """
-    Train a Neural Network model based on march madness games from seasons.
-    Requires RF model to be trained and saved first (shares scaler).
+    Train a calibrated XGBoost model based on march madness games from seasons.
     """
     if isinstance(seasons, int):
         seasons = [seasons]
 
     X_train, y_train, X_test, y_test = _prepare_data(seasons)
 
-    scaler = load_scaler()
-    X_train = scaler.transform(X_train)
+    scaler = StandardScaler()
+    X_train = scaler.fit_transform(X_train)
     X_test = scaler.transform(X_test)
 
-    X_train_t = torch.tensor(X_train, dtype=torch.float32)
-    y_train_t = torch.tensor(y_train, dtype=torch.float32).unsqueeze(1)
-    X_test_t = torch.tensor(X_test, dtype=torch.float32)
+    base_xgb = XGBClassifier(
+        n_estimators=200,
+        max_depth=4,
+        learning_rate=0.05,
+        subsample=0.8,
+        colsample_bytree=0.8,
+        eval_metric="logloss",
+        random_state=42
+    )
 
-    dataset = TensorDataset(X_train_t, y_train_t)
-    loader = DataLoader(dataset, batch_size=32, shuffle=True)
+    model = CalibratedClassifierCV(base_xgb, method="isotonic", cv=3)
+    model.fit(X_train, y_train)
 
-    model = MarchMadnessNN(input_dim=X_train.shape[1])
-    optimizer = torch.optim.Adam(model.parameters(), lr=1e-3, weight_decay=1e-4)
-    criterion = nn.BCELoss()
-
-    for epoch in range(100):
-        model.train()
-        for X_batch, y_batch in loader:
-            optimizer.zero_grad()
-            loss = criterion(model(X_batch), y_batch)
-            loss.backward()
-            optimizer.step()
+    y_prob = model.predict_proba(X_test)[:, 1]
+    y_pred = model.predict(X_test)
 
     if show_metrics:
-        model.eval()
-        with torch.no_grad():
-            y_prob = model(X_test_t).squeeze().numpy()
-            y_pred = (y_prob >= 0.5).astype(int)
         metrics(y_test, y_prob, y_pred)
         visualize(y_test, y_prob)
 
-    return model
+    return model, scaler
 
 
-def train_and_save_nn_model(seasons: int | list[int], show_metrics=True) -> MarchMadnessNN:
-    model = train_nn_model(seasons, show_metrics)
-    save_nn_model(model)
-    return model
+def train_and_save_xgb_model(seasons: int | list[int], show_metrics=True) -> tuple[CalibratedClassifierCV, StandardScaler]:
+    model, scaler = train_xgb_model(seasons, show_metrics)
+    save_xgb_model(model)
+    save_xgb_scaler(scaler)
+    return model, scaler

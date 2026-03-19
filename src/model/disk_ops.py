@@ -7,6 +7,21 @@ RF_MODEL_PATH = "data/rf_model.joblib"
 NN_MODEL_PATH = "data/nn_model.joblib"
 SCALER_PATH = "data/scaler.joblib"
 TEMPERATURES_PATH = "data/temperatures.joblib"
+XGB_MODEL_PATH = "data/xgb_model.joblib"
+XGB_SCALER_PATH = "data/xgb_scaler.joblib"
+
+def save_xgb_model(model):
+    joblib.dump({"model": model}, XGB_MODEL_PATH)
+
+def load_xgb_model():
+    bundle = joblib.load(XGB_MODEL_PATH)
+    return bundle["model"]
+
+def save_xgb_scaler(scaler: StandardScaler):
+    joblib.dump(scaler, XGB_SCALER_PATH)
+
+def load_xgb_scaler() -> StandardScaler:
+    return joblib.load(XGB_SCALER_PATH)
 
 def save_temperatures(T_rf: float, T_nn: float):
     joblib.dump({"T_rf": T_rf, "T_nn": T_nn}, TEMPERATURES_PATH)

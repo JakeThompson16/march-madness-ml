@@ -69,6 +69,7 @@ def generate_team_features(seasons: int | list[int]) -> pl.DataFrame:
 
     df = cbbd_data.join(sdv, left_on=["team", "season"], right_on=["team_location", "season"], how="inner")
     df = df.join(sos, left_on=["team", "season"], right_on=["team_location", "season"], how="inner")
+
     return df.join(seeds, on=["team", "season"], how="left")
 
 
