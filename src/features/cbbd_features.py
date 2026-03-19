@@ -1,18 +1,14 @@
-
+import os
 import cbbd
 import polars as pl
 from hidden.secrets import CBBD_API_KEY
 
 config = cbbd.Configuration(access_token=CBBD_API_KEY)
 
+CBBD_CACHE_PATH = "data/cbbd_cache.joblib"
 
-def extract_cbbd_data(seasons: int | list[int]) -> pl.DataFrame:
-    """
-    Returns polars df of necessary cbbd data from seasons
-    """
-    if isinstance(seasons, int):
-        seasons = [seasons]
 
+def _fetch_from_api(seasons: list[int]) -> pl.DataFrame:
     frames = []
     with cbbd.ApiClient(config) as client:
         ratings_api = cbbd.RatingsApi(client)
@@ -54,3 +50,31 @@ def extract_cbbd_data(seasons: int | list[int]) -> pl.DataFrame:
             frames.append(ratings_df.join(stats_df, on=["team", "season"], how="inner"))
 
     return pl.concat(frames) if len(frames) > 1 else frames[0]
+
+
+def cache_cbbd_data(seasons: int | list[int]) -> None:
+    """
+    Pulls data from CBBD API and saves to disk cache
+    """
+    import joblib
+    if isinstance(seasons, int):
+        seasons = [seasons]
+    df = _fetch_from_api(seasons)
+    joblib.dump(df, CBBD_CACHE_PATH)
+    print(f"Cached {len(seasons)} seasons to {CBBD_CACHE_PATH}")
+
+
+def extract_cbbd_data(seasons: int | list[int]) -> pl.DataFrame:
+    """
+    Returns polars df of necessary cbbd data from seasons.
+    Loads from disk cache if available, otherwise hits API.
+    """
+    import joblib
+    if isinstance(seasons, int):
+        seasons = [seasons]
+
+    if os.path.exists(CBBD_CACHE_PATH):
+        df = joblib.load(CBBD_CACHE_PATH)
+        return df.filter(pl.col("season").is_in(seasons))
+
+    return _fetch_from_api(seasons)
