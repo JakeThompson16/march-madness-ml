@@ -97,6 +97,7 @@ KAGGLE_TO_CBBD: dict[str, str] = {
     "SE Missouri St": "Southeast Missouri State",
     "St Bonaventure": "St. Bonaventure",
     "TX Southern": "Texas Southern",
+    "Miami OH" : "Miami (OH)",
 
     # Unmatchable / defunct teams — map to None to exclude
     "Alliant Intl": None,
