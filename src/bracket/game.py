@@ -10,6 +10,11 @@ class Game:
         :param tournament_round: Round of game
         :param winner: Winner of game if applicable
         """
+        # ensure team a is higher seed
+        if team_a.seed > team_b.seed:
+            temp = team_a
+            team_a = team_b
+            team_b = temp
         self.team_a: Team = team_a
         self.team_b: Team = team_b
         self.tournament_round: int = tournament_round

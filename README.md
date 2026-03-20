@@ -43,124 +43,124 @@ features to train using regular season games.
 up did not win in any trials*
 
 ========== Championship Probabilities ==========
-1. Duke (1):    20.62%
-2. UConn (2):   12.53%
-3. Michigan (1):        8.90%
-4. Arizona (1): 7.55%
-5. Gonzaga (3): 5.30%
-6. Michigan State (3):  5.26%
-7. Kansas (4):  4.73%
-8. Purdue (2):  4.60%
-9. Iowa State (2):      4.49%
-10. Virginia (3):       3.88%
-11. Florida (1):        3.04%
-12. Houston (2):        2.34%
-13. Louisville (6):     1.93%
-14. St. John's (5):     1.43%
-15. Alabama (4):        1.42%
-16. Nebraska (4):       1.25%
-17. Illinois (3):       1.18%
-18. Arkansas (4):       1.10%
-19. Wisconsin (5):      1.01%
-20. UCLA (7):   0.89%
-21. Ohio State (8):     0.81%
-22. Texas Tech (5):     0.73%
-23. Villanova (8):      0.62%
-24. BYU (6):    0.49%
-25. UCF (10):   0.34%
-26. Santa Clara (10):   0.32%
-27. Tennessee (6):      0.31%
-28. Georgia (8):        0.31%
-29. Miami (7):  0.29%
-30. Saint Louis (9):    0.24%
-31. Kentucky (7):       0.22%
-32. Vanderbilt (5):     0.18%
-33. South Florida (11): 0.17%
-34. TCU (9):    0.17%
-35. North Carolina (6): 0.17%
-36. Clemson (8):        0.17%
-37. Northern Iowa (12): 0.16%
-38. Saint Mary's (7):   0.13%
-39. Texas (11): 0.12%
-40. Utah State (9):     0.11%
-41. Missouri (10):      0.10%
-42. Akron (12): 0.09%
-43. Miami (OH) (11):    0.08%
-44. Texas A&M (10):     0.05%
-45. Iowa (9):   0.04%
-46. North Dakota State (14):    0.03%
-47. Furman (15):        0.03%
-48. Long Island University (16):        0.02%
-49. High Point (12):    0.02%
-50. VCU (11):   0.01%
+1. Duke (1):    17.93%
+2. UConn (2):   11.10%
+3. Michigan (1):        9.99%
+4. Arizona (1): 8.68%
+5. Purdue (2):  4.97%
+6. Gonzaga (3): 4.91%
+7. Florida (1): 4.87%
+8. Iowa State (2):      4.86%
+9. Kansas (4):  4.56%
+10. Michigan State (3): 4.17%
+11. Virginia (3):       3.64%
+12. Houston (2):        3.00%
+13. Louisville (6):     1.92%
+14. Illinois (3):       1.50%
+15. St. John's (5):     1.38%
+16. Nebraska (4):       1.36%
+17. Alabama (4):        1.25%
+18. Arkansas (4):       1.18%
+19. Texas Tech (5):     1.08%
+20. Wisconsin (5):      1.02%
+21. UCLA (7):   0.97%
+22. BYU (6):    0.70%
+23. Ohio State (8):     0.66%
+24. Villanova (8):      0.49%
+25. Tennessee (6):      0.38%
+26. UCF (10):   0.38%
+27. Saint Louis (9):    0.28%
+28. Vanderbilt (5):     0.26%
+29. Miami (7):  0.26%
+30. South Florida (11): 0.24%
+31. North Carolina (6): 0.23%
+32. Georgia (8):        0.22%
+33. Santa Clara (10):   0.21%
+34. Northern Iowa (12): 0.21%
+35. TCU (9):    0.20%
+36. Kentucky (7):       0.14%
+37. Texas (11): 0.13%
+38. Saint Mary's (7):   0.10%
+39. Clemson (8):        0.07%
+40. Missouri (10):      0.07%
+41. Utah State (9):     0.07%
+42. Miami (OH) (11):    0.07%
+43. VCU (11):   0.06%
+44. Akron (12): 0.04%
+45. North Dakota State (14):    0.04%
+46. Iowa (9):   0.04%
+47. Texas A&M (10):     0.03%
+48. High Point (12):    0.02%
+49. Tennessee State (15):       0.02%
+50. Kennesaw State (14):        0.01%
 51. Hofstra (13):       0.01%
-52. Tennessee State (15):       0.01%
+52. Furman (15):        0.01%
+53. Siena (16): 0.01%
 
 ========== Final Four Probabilities ==========
-1. Duke (1):    39.53%
-2. Michigan (1):        37.62%
-3. Florida (1): 33.92%
-4. Arizona (1): 33.84%
-5. UConn (2):   23.68%
-6. Houston (2): 23.19%
-7. Purdue (2):  23.01%
-8. Iowa State (2):      22.59%
-9. Gonzaga (3): 19.89%
-10. Virginia (3):       17.11%
-11. Illinois (3):       16.60%
-12. Nebraska (4):       13.28%
-13. Michigan State (3): 11.46%
-14. Kansas (4): 10.70%
-15. Alabama (4):        8.26%
-16. Arkansas (4):       7.77%
-17. Wisconsin (5):      4.85%
-18. Texas Tech (5):     4.64%
-19. Louisville (6):     4.54%
-20. St. John's (5):     3.70%
-21. Vanderbilt (5):     3.64%
-22. Villanova (8):      3.05%
-23. BYU (6):    2.82%
-24. North Carolina (6): 2.70%
-25. Tennessee (6):      2.36%
-26. UCLA (7):   2.34%
-27. Miami (7):  2.31%
-28. Saint Mary's (7):   2.21%
-29. Georgia (8):        1.92%
-30. Clemson (8):        1.68%
-31. Ohio State (8):     1.67%
-32. Kentucky (7):       1.55%
-33. Santa Clara (10):   1.45%
-34. Saint Louis (9):    1.28%
-35. UCF (10):   0.95%
-36. Iowa (9):   0.95%
-37. Texas A&M (10):     0.87%
-38. Utah State (9):     0.72%
-39. Texas (11): 0.71%
-40. Missouri (10):      0.63%
-41. Miami (OH) (11):    0.55%
-42. Akron (12): 0.53%
-43. South Florida (11): 0.48%
-44. VCU (11):   0.47%
-45. TCU (9):    0.41%
-46. Northern Iowa (12): 0.32%
-47. High Point (12):    0.22%
-48. Idaho (15): 0.17%
-49. McNeese (12):       0.12%
-50. Hofstra (13):       0.11%
-51. North Dakota State (14):    0.10%
-52. Troy (13):  0.09%
-53. Furman (15):        0.08%
-54. Pennsylvania (14):  0.07%
-55. Queens University (15):     0.06%
-56. Kennesaw State (14):        0.05%
-57. Prairie View A&M (16):      0.04%
-58. Long Island University (16):        0.04%
-59. Hawai'i (13):       0.03%
-60. Tennessee State (15):       0.02%
-61. Siena (16): 0.02%
-62. California Baptist (13):    0.02%
-63. Wright State (14):  0.01%
-
+1. Duke (1):    40.86%
+2. Michigan (1):        37.39%
+3. Arizona (1): 35.63%
+4. Florida (1): 34.51%
+5. UConn (2):   23.67%
+6. Purdue (2):  22.74%
+7. Iowa State (2):      22.68%
+8. Houston (2): 22.65%
+9. Gonzaga (3): 18.87%
+10. Virginia (3):       17.54%
+11. Illinois (3):       15.68%
+12. Nebraska (4):       13.92%
+13. Michigan State (3): 11.04%
+14. Kansas (4): 10.09%
+15. Alabama (4):        7.87%
+16. Arkansas (4):       7.15%
+17. Texas Tech (5):     5.11%
+18. Wisconsin (5):      5.01%
+19. Louisville (6):     4.62%
+20. Vanderbilt (5):     3.77%
+21. St. John's (5):     3.71%
+22. BYU (6):    3.30%
+23. North Carolina (6): 2.97%
+24. Villanova (8):      2.81%
+25. Tennessee (6):      2.60%
+26. Miami (7):  2.32%
+27. Saint Mary's (7):   2.24%
+28. UCLA (7):   2.14%
+29. Georgia (8):        1.74%
+30. Kentucky (7):       1.61%
+31. Clemson (8):        1.56%
+32. Saint Louis (9):    1.33%
+33. Ohio State (8):     1.32%
+34. Santa Clara (10):   1.17%
+35. Iowa (9):   1.07%
+36. UCF (10):   0.97%
+37. Utah State (9):     0.70%
+38. Texas A&M (10):     0.66%
+39. Missouri (10):      0.57%
+40. VCU (11):   0.52%
+41. TCU (9):    0.50%
+42. South Florida (11): 0.50%
+43. Texas (11): 0.50%
+44. Akron (12): 0.44%
+45. Northern Iowa (12): 0.44%
+46. Miami (OH) (11):    0.35%
+47. Idaho (15): 0.22%
+48. Queens University (15):     0.17%
+49. High Point (12):    0.17%
+50. McNeese (12):       0.11%
+51. Tennessee State (15):       0.08%
+52. North Dakota State (14):    0.08%
+53. Hofstra (13):       0.05%
+54. Troy (13):  0.05%
+55. Hawai'i (13):       0.04%
+56. Prairie View A&M (16):      0.04%
+57. Wright State (14):  0.03%
+58. California Baptist (13):    0.03%
+59. Pennsylvania (14):  0.03%
+60. Kennesaw State (14):        0.02%
+61. Furman (15):        0.02%
+62. Howard (16):        0.01%
+63. Siena (16): 0.01%
 
 ## Data Sources
  - College Basketball Data (CBBD)
