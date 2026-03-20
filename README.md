@@ -1,14 +1,42 @@
 # march-madness-ml
 Machine Learning tool to assign win probabilities to march madness games and construct brackets with differing levels of variance.
 
-*Disclaimer - GUI is built by AI*
-
 ## The Model
 Using an ensemble of XGBoost and Random Forest models (using the same features).
 Initially tested using Logistic Regression models which struggled in cross validation
 especially in heavy upset seasons. Also tried to implement Neural Network, but did not have 
 enough meaningful training data from tournament games, and could not establish high signal
 features to train using regular season games.
+
+## Metrics
+*targets indicate a strong model*
+- log loss: measures accuracy of predictions with regard to confidence (target < .60)
+- brier score: mean squared difference between actual outcome and probability predicted (target < .20)
+- auc roc: accuracy of model ranking teams against each other (target > .70)
+- accuracy: binary indicator of rate that higher prob team wins (target > .70)
+
+
+## Model Performance
+
+*The following evaluations are based on 8-fold cross validation from 2015-2025 excluding 2020 (no tournament)*
+
+========== Random Forest Averages ==========
+- log_loss: 0.5549
+- brier: 0.1865
+- auc_roc: 0.6902
+- accuracy: 0.7297
+
+========== XGBoost Averages ==========
+- log_loss: 0.5629
+- brier: 0.1897
+- auc_roc: 0.6671
+- accuracy: 0.7302
+
+========== Ensemble Averages ==========
+- log_loss: 0.5550
+- brier: 0.1867
+- auc_roc: 0.6878
+- accuracy: 0.7260
 
 ## Simulations
 *the following are win probabilities generated from 10,000 monte carlo simulations*
@@ -132,37 +160,6 @@ features to train using regular season games.
 * California Baptist (13):      0.0%
 * Tennessee State (15): 0.0%
 * Howard (16):  0.0%
-
-
-## Metrics
-*targets indicate a strong model*
-- log loss: measures accuracy of predictions with regard to confidence (target < .60)
-- brier score: mean squared difference between actual outcome and probability predicted (target < .20)
-- auc roc: accuracy of model ranking teams against each other (target > .70)
-- accuracy: binary indicator of rate that higher prob team wins (target > .70)
-
-
-## Model Performance
-
-*The following evaluations are based on 8-fold cross validation from 2015-2025 excluding 2020 (no tournament)*
-
-========== Random Forest Averages ==========
-- log_loss: 0.5549
-- brier: 0.1865
-- auc_roc: 0.6902
-- accuracy: 0.7297
-
-========== XGBoost Averages ==========
-- log_loss: 0.5629
-- brier: 0.1897
-- auc_roc: 0.6671
-- accuracy: 0.7302
-
-========== Ensemble Averages ==========
-- log_loss: 0.5550
-- brier: 0.1867
-- auc_roc: 0.6878
-- accuracy: 0.7260
 
 ## Data Sources
  - College Basketball Data (CBBD)
