@@ -1,5 +1,5 @@
 # march-madness-ml
-Machine Learning tool to assign win probabilities to march madness games and construct brackets with differing levels of variance.
+Machine Learning tool to assign win probabilities to march madness games and run full tournament simulations.
 
 ## The Model
 Using an ensemble of XGBoost and Random Forest models (using the same features).
@@ -18,7 +18,7 @@ features to train using regular season games.
 
 ## Model Performance
 
-*The following evaluations are based on 8-fold cross validation from 2015-2025 excluding 2020 (no tournament)*
+*The following evaluations are based on walk forward cross validation from 2015-2025 excluding 2020 (no tournament)*
 
 ========== Random Forest Averages ==========
 - log_loss: 0.5549
@@ -37,6 +37,8 @@ features to train using regular season games.
 - brier: 0.1867
 - auc_roc: 0.6878
 - accuracy: 0.7260
+
+*AUC ROC narrowly missed target, but other metrics exceeded targets considerably*
 
 ## Simulations
 *the following are win probabilities generated from 10,000 monte carlo simulations, teams that don't show 
