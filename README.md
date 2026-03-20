@@ -42,7 +42,7 @@ features to train using regular season games.
 
 ## Simulations
 *the following are win probabilities generated from 10,000 monte carlo simulations, teams that don't show 
-up did not win in any trials*
+up did not win in any trials, all data is pre-tournament*
 
 ========== Championship Probabilities ==========
 1. Duke (1):    17.93%
