@@ -29,13 +29,14 @@ def _precompute_matchups(bracket: Bracket) -> dict:
     return prob_cache
 
 
-def run_simulation(sim_amt=10000, verbose=False) -> dict[str, dict[Any, float | Any]]:
+def run_simulation(sim_amt=10000, verbose=False, bracket_name="bracket") -> dict[str, dict[Any, float | Any]]:
     """
     :param sim_amt: Amount of simulations to run
     :param verbose: True for updates of how many sims have run
+    :param bracket_name: "bracket" for full tournament, "sweet16" to simulate from Sweet 16 onward
     :return: Dictionary mapping team to win probability
     """
-    bracket = Bracket(season=2026)
+    bracket = Bracket(season=2026, bracket_name=bracket_name)
 
     if verbose:
         print("Precomputing matchup probabilities...")
@@ -56,6 +57,7 @@ def run_simulation(sim_amt=10000, verbose=False) -> dict[str, dict[Any, float | 
 
     winners = {}
     final_four_counts = {}
+    elite_eight_counts = {}
     start = time.time()
 
     for i in range(sim_amt):
@@ -73,6 +75,13 @@ def run_simulation(sim_amt=10000, verbose=False) -> dict[str, dict[Any, float | 
                 team = game[key]["team_name"]
                 final_four_counts[team] = final_four_counts.get(team, 0) + 1
 
+        if bracket_name == "sweet16":
+            for region_games in result["regions"].values():
+                elite_eight_game = region_games[-1]
+                for key in ["team_a", "team_b"]:
+                    team = elite_eight_game[key]["team_name"]
+                    elite_eight_counts[team] = elite_eight_counts.get(team, 0) + 1
+
         if verbose and (i + 1) % 100 == 0:
             elapsed = time.time() - start
             rate = (i + 1) / elapsed
@@ -85,7 +94,13 @@ def run_simulation(sim_amt=10000, verbose=False) -> dict[str, dict[Any, float | 
     sorted_winners = sorted(winners.items(), key=lambda x: x[1], reverse=True)
     sorted_ff = sorted(final_four_counts.items(), key=lambda x: x[1], reverse=True)
 
-    return {
+    output = {
         "champions": {team: count / sim_amt for team, count in sorted_winners},
-        "final_four": {team: count / sim_amt for team, count in sorted_ff}
+        "final_four": {team: count / sim_amt for team, count in sorted_ff},
     }
+
+    if bracket_name == "sweet16":
+        sorted_e8 = sorted(elite_eight_counts.items(), key=lambda x: x[1], reverse=True)
+        output["elite_eight"] = {team: count / sim_amt for team, count in sorted_e8}
+
+    return output

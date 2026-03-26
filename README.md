@@ -40,7 +40,7 @@ features to train using regular season games.
 
 *AUC ROC narrowly missed target, but other metrics exceeded targets considerably*
 
-## Simulations
+## Full Bracket Simulations
 *the following are win probabilities generated from 10,000 monte carlo simulations, teams that don't show 
 up did not win in any trials, all data is pre-tournament*
 
@@ -163,6 +163,47 @@ up did not win in any trials, all data is pre-tournament*
 61. Furman (15):        0.02%
 62. Howard (16):        0.01%
 63. Siena (16): 0.01%
+
+## Sweet 16 Simulations
+*Simulations run from the actual 2026 Sweet 16; it is worth noting the model only uses 
+pre tournament data, so these probabilities more closely
+reflect each teams chance to win if we knew they would be in the sweet 16 pre-tournament*
+
+========== Championship Probabilities ==========
+1. Duke (1):    23.39%
+2. Michigan (1):        16.73%
+3. Arizona (1): 15.02%
+4. UConn (2):   11.74%
+5. Houston (2): 6.93%
+6. Purdue (2):  5.92%
+7. Iowa State (2):      5.38%
+8. Michigan State (3):  4.08%
+9. St. John's (5):      2.27%
+10. Nebraska (4):       2.25%
+11. Alabama (4):        1.70%
+12. Arkansas (4):       1.40%
+13. Illinois (3):       1.32%
+14. Texas (11): 0.82%
+15. Tennessee (6):      0.72%
+16. Iowa (9):   0.33%
+
+========== Final Four Probabilities ==========
+1. Duke (1):    57.89%
+2. Arizona (1): 56.99%
+3. Michigan (1):        54.53%
+4. Houston (2): 52.20%
+5. Iowa State (2):      29.82%
+6. Purdue (2):  29.09%
+7. UConn (2):   27.58%
+8. Nebraska (4):        23.08%
+9. Illinois (3):        18.76%
+10. Alabama (4):        9.94%
+11. Michigan State (3): 9.07%
+12. Arkansas (4):       8.62%
+13. Iowa (9):   5.96%
+14. Tennessee (6):      5.71%
+15. St. John's (5):     5.46%
+16. Texas (11): 5.30%
 
 ## Data Sources
  - College Basketball Data (CBBD)

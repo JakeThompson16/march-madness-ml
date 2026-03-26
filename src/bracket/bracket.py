@@ -5,14 +5,15 @@ from src.bracket.game import Game
 
 
 class Bracket:
-    def __init__(self, season: int):
+    def __init__(self, season: int, bracket_name: str="bracket"):
         self.season = season
+        self.bracket_name = bracket_name
         self.regions: dict = {}
         self.final_four: list[Game] = []
         self.championship: Game | None = None
         self.winner: Team | None = None
 
-        config = importlib.import_module(f"data.bracket_{season}")
+        config = importlib.import_module(f"data.{bracket_name}_{season}")
         self.region_config: dict[str, dict[int, str]] = config.REGIONS_2026
 
     def _build_teams(self, region_name: str) -> list[Team]:
@@ -33,11 +34,29 @@ class Bracket:
         teams = self._build_teams(region_name)
         games = []
 
-        # Standard NCAA first round matchups: 1v16, 8v9, 5v12, 4v13, 6v11, 3v14, 7v10, 2v15
-        matchup_order = [(0, 15), (7, 8), (4, 11), (3, 12), (5, 10), (2, 13), (6, 9), (1, 14)]
-        current_round = [(teams[a], teams[b]) for a, b in matchup_order]
+        if self.bracket_name == "sweet16":
+            seed_to_slot = {1:0, 16:0, 8:0, 9:0, 5:1, 12:1, 4:1, 13:1,
+                            6:2, 11:2, 3:2, 14:2, 7:3, 10:3, 2:3, 15:3}
 
-        for round_num in range(1, 5):
+            slots = {0: [], 1: [], 2: [], 3: []}
+            for team in teams:
+                slot = seed_to_slot.get(team.seed)
+                if slot is None:
+                    raise ValueError(f"Seed {team.seed} not recognized in bracket slot map")
+                slots[slot].append(team)
+
+            current_round = [
+                (slots[0][0], slots[1][0]),
+                (slots[2][0], slots[3][0]),
+            ]
+            starting_round = 3
+        else:
+            # Standard NCAA first round matchups: 1v16, 8v9, 5v12, 4v13, 6v11, 3v14, 7v10, 2v15
+            matchup_order = [(0, 15), (7, 8), (4, 11), (3, 12), (5, 10), (2, 13), (6, 9), (1, 14)]
+            current_round = [(teams[a], teams[b]) for a, b in matchup_order]
+            starting_round = 1
+
+        for round_num in range(starting_round, starting_round + len(current_round).bit_length()):
             next_round = []
             for team_a, team_b in current_round:
                 game = Game(team_a, team_b, round_num)
