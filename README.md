@@ -40,6 +40,38 @@ features to train using regular season games.
 
 *AUC ROC narrowly missed target, but other metrics exceeded targets considerably*
 
+## 2026 Tournament Results and Validation
+An assessment of the model's predictions compared to true outcomes of the 2026 March 
+Madness Tournament, see simulation results in section below.
+
+*Note: The 2026 tournament produced only 6 upsets by the official NCAA definition, 
+making it a relatively chalk-friendly field that generally favors efficiency-based models.*
+
+### Hits
+* UConn entered as the model's **#2 championship probability (11.10%)** and reached 
+the national championship game as a finalist
+* All four Final Four teams (Michigan, Arizona, UConn, Illinois) were identified in 
+the model's **top 11 Final Four probabilities** pre-tournament, with Michigan at 37.39%, 
+Arizona at 35.63%, UConn at 23.67%, and Illinois at 15.68%
+* Championship game implied probabilities (**Michigan: 74.5%, UConn: 25.5%**) closely 
+matched opening sports betting lines of -280 to -300 for Michigan, translating to implied 
+win probabilities of **73.88% to 75.00%** — within 1% of the model's output
+* Illinois was identified as a legitimate Final Four contender at **15.68% Final Four 
+probability** despite being a 3-seed, correctly anticipating their run over Houston and Iowa
+
+### Misses
+* Duke was overvalued as the outright championship favorite at **17.93%**, falling in 
+the Elite Eight to UConn — worth noting that UConn eliminating Duke was within the model's 
+probability space given UConn's **#2 championship ranking**
+* Gonzaga (**4.91%**) and Kansas (**4.56%**) were both overvalued relative to their 
+performance, with neither advancing past the Round of 32
+* Florida was assigned a **34.51% Final Four probability** — the model's largest miss — 
+as they were eliminated by 9-seed Iowa in the Round of 32
+* No meaningful signal toward Iowa's Cinderella run, likely due to their **3-7 record 
+in their final 10 regular season games** suppressing their last 10 game win % feature, 
+despite underlying efficiency metrics suggesting a stronger team — a candidate feature 
+to revisit in future iterations
+
 ## Full Bracket Simulations
 *the following are win probabilities generated from 10,000 monte carlo simulations, teams that don't show 
 up did not win in any trials, all data is pre-tournament*
